@@ -1,6 +1,8 @@
 ﻿namespace LINQ_Mangum_Stephen
 {
     using System.Linq;
+    using System.Net.WebSockets;
+
     internal class Program
     {
         static void Main(string[] args)
@@ -33,6 +35,26 @@
 
 
             Console.WriteLine(mineCraft.FirstOrDefault());
+
+            var tRated = from game in games
+                         where game.Esrb == 'T'
+                         select game.Title;
+
+            Console.WriteLine("T Rated Games:");
+            foreach(var game in tRated)
+            {
+                Console.WriteLine(game);
+            }
+
+            var eRatedAction = from game in games
+                               where game.Esrb == 'E' && game.Genre.Contains("Action")
+                               select game.Title;
+
+            Console.WriteLine("E Rated Action Games:");
+            foreach (var game in eRatedAction)
+            {
+                Console.WriteLine(game);
+            }
         }
     }
 }
